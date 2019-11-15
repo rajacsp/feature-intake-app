@@ -1,15 +1,13 @@
-{% extends "base.html" %}
-{% block body %}
+{% extends "base.html" %} {% block body %}
 
 <div class="container">
     <div class="well">
         {% for log_entry in log_entries %}
-            <p>
-                <strong>{{ log_entry.timestamp }}:</strong> 
-                {{ log_entry.message }}
-            </p>
+        <p>
+            <strong>{{ log_entry.timestamp }}:</strong> {{ log_entry.message }}
+        </p>
         {% endfor %}
     </div>
-<div>
+    <div>
 
-{% endblock %}
+        {% endblock %}

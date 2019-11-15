@@ -12,7 +12,7 @@ def create_tags():
     db.session.add(tag3)
     db.session.commit()
 
-def create_missions():
+def create_categories():
     mission1 = Mission("Finish Stuff", 'Just finish some stuff', 1)
     mission2 = Mission("Whatever Class", 'Accomplish that impossible goal', 2)
     mission3 = Mission("Second Release", 'Pretend to be productive', 3)
@@ -37,8 +37,8 @@ def run_seed():
     print("Creating Tags...")
     create_tags()
 
-    print("Creating Missions...")
-    create_missions()
+    print("Creating Categories...")
+    create_categories()
 
     print("Creating Tasks...")
     create_tasks()

@@ -9,12 +9,12 @@ from flasktasks.signals import task_created, mission_created
 def index():
     return render_template('home.html')
 
-@app.route('/missions')
-def missions():
-    missions = Mission.query.all()
-    return render_template('mission/index.html', missions=missions)
+@app.route('/categories')
+def categories():
+    categories = Mission.query.all()
+    return render_template('category/index.html', categories=categories)
 
-@app.route('/missions/new', methods=['POST', 'GET'])
+@app.route('/categories/new', methods=['POST', 'GET'])
 def new_mission():
     if request.method == 'POST':
         mission = Mission(request.form.get('title'),
@@ -23,10 +23,10 @@ def new_mission():
         db.session.add(mission)
         db.session.commit()
         mission_created.send(mission)
-        return redirect(url_for('missions'))
+        return redirect(url_for('categories'))
     else:
         tags = Tag.query.all()
-        return render_template('mission/new.html', tags=tags)
+        return render_template('category/new.html', tags=tags)
 
 @app.route('/tasks')
 def tasks():
@@ -82,12 +82,12 @@ def delete_task(task_id):
     db.session.commit()
     return url_for('tasks')
     
-@app.route('/missions/<int:mission_id>', methods=['DELETE'])
+@app.route('/categories/<int:mission_id>', methods=['DELETE'])
 def delete_mission(mission_id):
     mission = Mission.query.get_or_404(mission_id)
     db.session.delete(mission)
     db.session.commit()
-    return url_for('missions')
+    return url_for('categories')
 
 @app.route('/tags/new', methods=['POST', 'GET'])
 def new_tag():
@@ -99,7 +99,7 @@ def new_tag():
         tag = Tag(request.form.get('name'), color)
         db.session.add(tag)
         db.session.commit()
-        return redirect(url_for('missions'))
+        return redirect(url_for('categories'))
     else:
         colors = { color.name: color.value for color in Color }
         return render_template('tags/new.html', colors=colors)

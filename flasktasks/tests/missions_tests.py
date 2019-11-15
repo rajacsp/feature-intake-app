@@ -18,21 +18,21 @@ class MissionsTest(FlaskTasksTestCase):
         db.session.add(second_mission)
         db.session.commit()
 
-        response = self.app.get('/missions')
+        response = self.app.get('/categories')
         assert b'mission a' in response.data
         assert b'mission b' in response.data
 
     def test_new_mission_form(self):
-        response = self.app.get('/missions/new')
-        assert b'New Mission' in response.data
+        response = self.app.get('/categories/new')
+        assert b'New Category' in response.data
 
     def test_mission_creation(self):
         data = { 'title':'some mission', 'description':'a useful description',
                  'tag_id':self.valid_tag.id }
-        response = self.app.post('/missions/new', data=data)
+        response = self.app.post('/categories/new', data=data)
         assert response.status_code == 302
 
-        response = self.app.get('/missions')
+        response = self.app.get('/categories')
         assert b'some mission' in response.data
 
 if __name__ == '__main__':
