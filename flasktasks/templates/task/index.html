@@ -19,10 +19,16 @@
     {% endif %}
 
     <div class="row kanban">
-        <div class="col-sm-4">
+        <div class="col-sm-2">
+            {% with title="Proposed", status="PROPOSED", icon="fire" %} {% include "task/kanban_panel.html" %} {% endwith %}
+        </div>
+        <div class="col-sm-2">
+            {% with title="Manager Approved", status="MANAGER_APPROVED", icon="fire" %} {% include "task/kanban_panel.html" %} {% endwith %}
+        </div>
+        <div class="col-sm-2">
             {% with title="To Do", status="TO_DO", icon="fire" %} {% include "task/kanban_panel.html" %} {% endwith %}
         </div>
-        <div class="col-sm-4">
+        <div class="col-sm-2">
             {% with title="Doing", status="DOING", icon="send" %} {% include "task/kanban_panel.html" %} {% endwith %}
         </div>
         <div class="col-sm-4">

@@ -4,9 +4,11 @@ from time import strftime
 
 
 class Status(Enum):
-    TO_DO = 1
-    DOING = 2
-    DONE = 3
+    PROPOSED = 1
+    MANAGER_APPROVED = 2
+    TO_DO = 3
+    DOING = 4
+    DONE = 5
 
 class Color(Enum):
     GREY = 1
