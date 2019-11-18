@@ -22,25 +22,21 @@ def create_tags():
     db.session.commit()
 
 def create_categories():
-    mission1 = Mission("Finish Stuff", 'Just finish some stuff', 1)
-    mission2 = Mission("Whatever Class", 'Accomplish that impossible goal', 2)
-    mission3 = Mission("Second Release", 'Pretend to be productive', 3)
+    mission1 = Mission("Front End", 'UI Work', 1)
+    mission2 = Mission("Back End", 'Backend Work', 2)
 
     db.session.add(mission1)
     db.session.add(mission2)
-    db.session.add(mission3)
 
     db.session.commit()
 
 def create_tasks():
-    for i in range(1, 4):
+    for i in range(1, 3):
         task1 = Task("First Task", "Some useful description", i)
         task2 = Task("Second Task", "Some useful description", i)
-        task3 = Task("Third Task", "Some useful description", i)
 
         db.session.add(task1)
         db.session.add(task2)
-        db.session.add(task3)
 
     db.session.commit()
 
