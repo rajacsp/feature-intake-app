@@ -16,10 +16,16 @@
         </div>
 
         <div class="form-group">
-            <select class="form-control" name="category_id">
+            <select class="form-control" name="benefit_id">
                 <option value="-1">Select a Benefit</option>
-                <option value="1">{{ category.title }}</option>
+                {% for benefit in benefits %}
+                    <option value="{{ benefit.id }}" {{ benefit.id | is_selected }}>{{ benefit.btype }}</option>
+                {% endfor %}
             </select>
+        </div>
+
+        <div class="form-group">
+            <input name="benefit_value" type="text" class="form-control" placeholder="Benefit Value" required>
         </div>
 
         <div class="form-group">

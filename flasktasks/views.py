@@ -90,7 +90,8 @@ def new_task():
         return redirect(url_for('tasks'))
     else:
         categories = Category.query.all()
-        return render_template('task/new.html', categories=categories)
+        benefits = Benefit.query.all()
+        return render_template('task/new.html', categories = categories, benefits = benefits)
 
 
 @app.route('/tasks/<int:task_id>', methods=['POST'])
