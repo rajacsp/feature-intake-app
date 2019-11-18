@@ -87,6 +87,22 @@ def new_task():
         categories = Category.query.all()
         return render_template('task/new.html', categories=categories)
 
+
+@app.route('/tasks/<int:task_id>', methods=['POST'])
+def update_task(task_id):
+
+    task = Task.query.get_or_404(task_id)
+    try:
+        task.title = request.form.get('title')
+        task.description = request.form.get('description')
+    except KeyError:
+        abort(400)
+
+    db.session.add(task)
+    db.session.commit()
+    return redirect(url_for('tasks'))
+    
+
 @app.route('/tasks/<int:task_id>')
 def task(task_id):
     task = Task.query.get_or_404(task_id)

@@ -17,3 +17,12 @@ function http_delete(element) {
         }
     });
 }
+
+
+$(document).ready(function() {
+    $("p.lead").click(function() {
+        //console.log('clicked');
+
+        $('div#task_form').css("visibility", "visible");
+    });
+});
