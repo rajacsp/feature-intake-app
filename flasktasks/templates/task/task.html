@@ -39,7 +39,7 @@
                 <a href="{{ url_for('set_status', task_id=task.id, status='proposed') }}" class="btn box {{ 'btn-success' if task.status == 1 else '' }}">Proposed</a>
                 <a href="{{ url_for('set_status', task_id=task.id, status='manager_approved') }}" class="btn box {{ 'btn-success' if task.status == 2 else '' }}">Approved</a>
                 <a href="{{ url_for('set_status', task_id=task.id, status='to_do') }}" class="btn box {{ 'btn-success' if task.status == 3 else '' }}">To do</a>
-                <a href="{{ url_for('set_status', task_id=task.id, status='doing') }}" class="btn box {{ 'btn-success' if task.status == 4 else '' }}">Doing</a>
+                <a href="{{ url_for('set_status', task_id=task.id, status='doing') }}" class="btn box {{ 'btn-success' if task.status == 4 else '' }}">In Progress</a>
                 <a href="{{ url_for('set_status', task_id=task.id, status='done') }}" class="btn box {{ 'btn-success' if task.status == 5 else '' }}">Done</a>
 
             </div>
