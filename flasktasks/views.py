@@ -41,7 +41,7 @@ def login():
 @app.route('/categories')
 def categories():
     categories = Mission.query.all()
-    return render_template('category/index.html', categories=categories)
+    return render_template('category/index.html', missions=categories)
 
 @app.route('/categories/new', methods=['POST', 'GET'])
 def new_mission():
