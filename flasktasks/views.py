@@ -81,6 +81,8 @@ def new_task():
         task = Task(request.form.get('title'),
                     request.form.get('outcome'),
                     request.form.get('description'),
+                    request.form.get('benefit_id'),
+                    request.form.get('benefit_value'),
                     request.form.get('category_id'))
         db.session.add(task)
         db.session.commit()

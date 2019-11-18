@@ -45,8 +45,8 @@ def create_categories():
 
 def create_tasks():
     for i in range(1, 3):
-        task1 = Task("First Task", "Outcome", "Some useful description", i)
-        task2 = Task("Second Task", "Outcome", "Some useful description", i)
+        task1 = Task("First Task", "Outcome", "Some useful description", 1, "100", i)
+        task2 = Task("Second Task", "Outcome", "Some useful description", 1, "200", i)
 
         db.session.add(task1)
         db.session.add(task2)

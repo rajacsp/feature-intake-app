@@ -23,12 +23,16 @@ class Task(db.Model):
     outcome = db.Column(db.String(140))
     description = db.Column(db.String(140))
     status = db.Column(db.Integer)
+    benefit_id = db.Column(db.Integer, db.ForeignKey('benefit.id'))
+    benefit_value = db.Column(db.String(140))
     category_id = db.Column(db.Integer, db.ForeignKey('category.id'))
 
-    def __init__(self, title, outcome, description, category_id):
+    def __init__(self, title, outcome, description, benefit_id, benefit_value, category_id):
         self.title = title
         self.outcome = outcome
         self.description = description
+        self.benefit_id = benefit_id
+        self.benefit_value = benefit_value
         self.status = Status.PROPOSED.value
         self.category_id = category_id
 
