@@ -1,6 +1,14 @@
 from flasktasks import db
-from flasktasks.models import Tag, Mission, Task, Color
+from flasktasks.models import Tag, Mission, Task, Color, User
 
+def create_users():
+    user1 = User("raja", "test", 1)
+    user2 = User("gautam", "test", 2)
+    
+    db.session.add(user1)
+    db.session.add(user2)
+
+    db.session.commit()
 
 def create_tags():
     tag1 = Tag("Work", Color.BLUE)
@@ -10,6 +18,7 @@ def create_tags():
     db.session.add(tag1)
     db.session.add(tag2)
     db.session.add(tag3)
+
     db.session.commit()
 
 def create_categories():
@@ -20,6 +29,7 @@ def create_categories():
     db.session.add(mission1)
     db.session.add(mission2)
     db.session.add(mission3)
+
     db.session.commit()
 
 def create_tasks():
@@ -31,9 +41,14 @@ def create_tasks():
         db.session.add(task1)
         db.session.add(task2)
         db.session.add(task3)
+
     db.session.commit()
 
 def run_seed():
+    
+    print("Creating Users...")
+    create_users()
+
     print("Creating Tags...")
     create_tags()
 

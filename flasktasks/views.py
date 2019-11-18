@@ -1,13 +1,42 @@
 from flask import render_template, request, redirect, url_for, abort, jsonify
 from collections import defaultdict
 from flasktasks import app, db
-from flasktasks.models import Mission, Task, Status, Tag, Color, LogEntry
+from flasktasks.models import Mission, Task, Status, Tag, Color, LogEntry, User
 from flasktasks.signals import task_created, mission_created 
 
 
 @app.route('/')
 def index():
     return render_template('home.html')
+
+@app.route('/login')
+def login_page():
+    return render_template('login.html')
+
+
+def is_user_available(email, password):
+
+    CUser = db.session.query(User).filter(User.email == email).filter(User.password == password).first()
+
+    print(CUser)
+
+    if(CUser):
+        return True
+
+    return False
+
+@app.route('/login', methods=['POST'])
+def login():
+
+    email = request.form.get('email')
+    password = request.form.get('password')
+
+    #print(email, password)
+
+    if(is_user_available(email, password)):
+        return render_template('loggedin.html')
+
+    return render_template('login_failed.html')
 
 @app.route('/categories')
 def categories():

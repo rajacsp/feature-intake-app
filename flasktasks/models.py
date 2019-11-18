@@ -57,6 +57,17 @@ class Tag(db.Model):
         return "tagged tag-%s" % color.name.lower()
 
 
+class User(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    email = db.Column(db.String(50), unique=True)
+    password = db.Column(db.String(50))
+    role = db.Column(db.Integer)
+
+    def __init__(self, name, password, role):
+        self.email = name
+        self.password = password
+        self.role = role
+
 class LogEntry(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     timestamp = db.Column(db.String(30))
