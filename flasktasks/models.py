@@ -27,7 +27,7 @@ class Task(db.Model):
     def __init__(self, title, description, category_id):
         self.title = title
         self.description = description
-        self.status = Status.TO_DO.value
+        self.status = Status.PROPOSED.value
         self.category_id = category_id
 
 class Category(db.Model):

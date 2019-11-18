@@ -1,4 +1,10 @@
 {% extends "base.html" %} {% block body %}
+
+<style>
+    a.box {
+        border: 1px solid gray;
+    }
+</style>
 <div class="container">
     <div class="page-header">
         <h1>{{ task.title }}</h1>
@@ -7,13 +13,7 @@
     <div class="row">
         <div class="col-sm-6">
             <p class="lead">
-
-
                 {{ task.description }}
-
-
-
-
             </p>
 
             <div id="task_form" style="visibility: hidden;">
@@ -29,13 +29,19 @@
                 </form>
             </div>
         </div>
+
+        {{task.status}}
         <div class="col-sm-6 task-control">
             <div class="btn-group btn-group-justified" role="group">
-                <a href="{{ url_for('set_status', task_id=task.id, status='proposed') }}" class="btn btn-warning">Proposed</a>
-                <a href="{{ url_for('set_status', task_id=task.id, status='manager_approved') }}" class="btn btn-warning">Manager Approved</a>
-                <a href="{{ url_for('set_status', task_id=task.id, status='to_do') }}" class="btn btn-warning">To do</a>
-                <a href="{{ url_for('set_status', task_id=task.id, status='doing') }}" class="btn btn-primary">Doing</a>
-                <a href="{{ url_for('set_status', task_id=task.id, status='done') }}" class="btn btn-success">Done</a>
+
+
+
+                <a href="{{ url_for('set_status', task_id=task.id, status='proposed') }}" class="btn box {{ 'btn-success' if task.status == 1 else '' }}">Proposed</a>
+                <a href="{{ url_for('set_status', task_id=task.id, status='manager_approved') }}" class="btn box {{ 'btn-success' if task.status == 2 else '' }}">Approved</a>
+                <a href="{{ url_for('set_status', task_id=task.id, status='to_do') }}" class="btn box {{ 'btn-success' if task.status == 3 else '' }}">To do</a>
+                <a href="{{ url_for('set_status', task_id=task.id, status='doing') }}" class="btn box {{ 'btn-success' if task.status == 4 else '' }}">Doing</a>
+                <a href="{{ url_for('set_status', task_id=task.id, status='done') }}" class="btn box {{ 'btn-success' if task.status == 5 else '' }}">Done</a>
+
             </div>
             <div class="btn-group btn-group-justified" role="group">
                 <a href="{{ url_for('delete_task', task_id=task.id) }}" id="delete-task" class="btn btn-link"><span class="glyphicon glyphicon-trash"></span>Remove</a>
