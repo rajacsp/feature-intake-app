@@ -1,8 +1,8 @@
 from flask import render_template, request, redirect, url_for, abort, jsonify
 from collections import defaultdict
 from flasktasks import app, db
-from flasktasks.models import Mission, Task, Status, Tag, Color, LogEntry, User
-from flasktasks.signals import task_created, mission_created 
+from flasktasks.models import Category, Task, Status, Tag, Color, LogEntry, User
+from flasktasks.signals import task_created, category_created 
 
 
 @app.route('/')
@@ -40,18 +40,18 @@ def login():
 
 @app.route('/categories')
 def categories():
-    categories = Mission.query.all()
-    return render_template('category/index.html', missions=categories)
+    categories = Category.query.all()
+    return render_template('category/index.html', categories=categories)
 
 @app.route('/categories/new', methods=['POST', 'GET'])
-def new_mission():
+def new_category():
     if request.method == 'POST':
-        mission = Mission(request.form.get('title'),
+        category = Category(request.form.get('title'),
                           request.form.get('description'),
                           request.form.get('tag_id'))
-        db.session.add(mission)
+        db.session.add(category)
         db.session.commit()
-        mission_created.send(mission)
+        category_created.send(category)
         return redirect(url_for('categories'))
     else:
         tags = Tag.query.all()
@@ -59,10 +59,10 @@ def new_mission():
 
 @app.route('/tasks')
 def tasks():
-    mission = None
-    if request.args.get('mission_id'):
-        mission = Mission.query.get_or_404(request.args.get('mission_id'))
-        tasks = Task.query.filter_by(mission_id=mission.id).all()
+    category = None
+    if request.args.get('category_id'):
+        category = Category.query.get_or_404(request.args.get('category_id'))
+        tasks = Task.query.filter_by(category_id=category.id).all()
     else:
         tasks = Task.query.all()
 
@@ -71,21 +71,21 @@ def tasks():
         status = Status(task.status).name 
         tasks_by_status[status].append(task)
     return render_template('task/index.html', tasks=tasks_by_status,
-                           mission=mission)
+                           category=category)
 
 @app.route('/tasks/new', methods=['POST', 'GET'])
 def new_task():
     if request.method == 'POST':
         task = Task(request.form.get('title'),
                     request.form.get('description'),
-                    request.form.get('mission_id'))
+                    request.form.get('category_id'))
         db.session.add(task)
         db.session.commit()
         task_created.send(task)
         return redirect(url_for('tasks'))
     else:
-        missions = Mission.query.all()
-        return render_template('task/new.html', missions=missions)
+        categories = Category.query.all()
+        return render_template('task/new.html', categories=categories)
 
 @app.route('/tasks/<int:task_id>')
 def task(task_id):
@@ -111,10 +111,10 @@ def delete_task(task_id):
     db.session.commit()
     return url_for('tasks')
     
-@app.route('/categories/<int:mission_id>', methods=['DELETE'])
-def delete_mission(mission_id):
-    mission = Mission.query.get_or_404(mission_id)
-    db.session.delete(mission)
+@app.route('/categories/<int:category_id>', methods=['DELETE'])
+def delete_category(category_id):
+    category = Category.query.get_or_404(category_id)
+    db.session.delete(category)
     db.session.commit()
     return url_for('categories')
 

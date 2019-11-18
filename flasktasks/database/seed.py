@@ -1,5 +1,5 @@
 from flasktasks import db
-from flasktasks.models import Tag, Mission, Task, Color, User
+from flasktasks.models import Tag, Category, Task, Color, User
 
 def create_users():
     user1 = User("raja", "test", 1)
@@ -22,11 +22,11 @@ def create_tags():
     db.session.commit()
 
 def create_categories():
-    mission1 = Mission("Front End", 'UI Work', 1)
-    mission2 = Mission("Back End", 'Backend Work', 2)
+    category1 = Category("Front End", 'UI Work', 1)
+    category2 = Category("Back End", 'Backend Work', 2)
 
-    db.session.add(mission1)
-    db.session.add(mission2)
+    db.session.add(category1)
+    db.session.add(category2)
 
     db.session.commit()
 

@@ -22,20 +22,20 @@ class Task(db.Model):
     title = db.Column(db.String(70))
     description = db.Column(db.String(140))
     status = db.Column(db.Integer)
-    mission_id = db.Column(db.Integer, db.ForeignKey('mission.id'))
+    category_id = db.Column(db.Integer, db.ForeignKey('category.id'))
 
-    def __init__(self, title, description, mission_id):
+    def __init__(self, title, description, category_id):
         self.title = title
         self.description = description
         self.status = Status.TO_DO.value
-        self.mission_id = mission_id
+        self.category_id = category_id
 
-class Mission(db.Model):
+class Category(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(70), unique=True)
     description = db.Column(db.String(210))
     tag_id = db.Column(db.Integer, db.ForeignKey('tag.id'))
-    tasks = db.relationship('Task', backref='mission', lazy='dynamic')
+    tasks = db.relationship('Task', backref='category', lazy='dynamic')
 
     def __init__(self, title, description, tag_id):
         self.title = title
@@ -46,7 +46,7 @@ class Tag(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(20), unique=True)
     color = db.Column(db.Integer)
-    missions = db.relationship('Mission', backref='tag', lazy='dynamic')
+    categories = db.relationship('Category', backref='tag', lazy='dynamic')
 
     def __init__(self, name, color=Color.GREY):
         self.name = name

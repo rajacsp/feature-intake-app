@@ -4,12 +4,12 @@
         <h1>Tasks<small class="pull-right">Category</small></h1>
     </div>
 
-    {% if mission %}
+    {% if category %}
     <div class="well well-lg">
-        <h4>{{ mission.title }}, <small>{{ mission.description }}</small></h4>
+        <h4>{{ category.title }}, <small>{{ category.description }}</small></h4>
         <div class="btn-group task-control" role="group">
-            <a href="{{ url_for('new_task', mission_id=mission.id) }}" class="btn btn-link new-item"><span class="glyphicon glyphicon-plus"></span>New Task</a>
-            <a href="{{ url_for('delete_mission', mission_id=mission.id) }}" id="delete-mission" class="btn btn-link"><span class="glyphicon glyphicon-trash"></span>Remove</a>
+            <a href="{{ url_for('new_task', category_id=category.id) }}" class="btn btn-link new-item"><span class="glyphicon glyphicon-plus"></span>New Task</a>
+            <a href="{{ url_for('delete_category', category_id=category.id) }}" id="delete-category" class="btn btn-link"><span class="glyphicon glyphicon-trash"></span>Remove</a>
         </div>
     </div>
     {% else %}

@@ -3,8 +3,8 @@ from flasktasks import app
 
 
 @app.template_filter('is_selected')
-def is_mission_selected(mission_id):
-    if str(mission_id) == request.args.get('mission_id'):
+def is_category_selected(category_id):
+    if str(category_id) == request.args.get('category_id'):
         return "selected"
     else:
         return ''
