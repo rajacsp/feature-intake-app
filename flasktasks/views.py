@@ -1,13 +1,15 @@
 from flask import render_template, request, redirect, url_for, abort, jsonify
 from collections import defaultdict
 from flasktasks import app, db
-from flasktasks.models import Category, Task, Status, Tag, Color, LogEntry, User
+from flasktasks.models import Category, Task, Status, Tag, Color, LogEntry, User, Benefit
 from flasktasks.signals import task_created, category_created 
 
 
 @app.route('/')
 def index():
-    return render_template('home.html')
+    categories = Category.query.all()
+    benefits = Benefit.query.all()
+    return render_template('home.html', categories=categories, benefits = benefits)
 
 @app.route('/login')
 def login_page():
@@ -18,7 +20,7 @@ def is_user_available(email, password):
 
     CUser = db.session.query(User).filter(User.email == email).filter(User.password == password).first()
 
-    print(CUser)
+    #print(CUser)
 
     if(CUser):
         return True
@@ -77,6 +79,7 @@ def tasks():
 def new_task():
     if request.method == 'POST':
         task = Task(request.form.get('title'),
+                    request.form.get('outcome'),
                     request.form.get('description'),
                     request.form.get('category_id'))
         db.session.add(task)

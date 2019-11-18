@@ -9,7 +9,17 @@
             <input name="title" type="text" class="form-control" placeholder="What must be done?" required>
         </div>
         <div class="form-group">
+            <input name="outcome" type="text" class="form-control" placeholder="What is the outcome they are looking for?" required>
+        </div>
+        <div class="form-group">
             <textarea name="description" class="form-control" rows="3" placeholder="Describe at will"></textarea>
+        </div>
+
+        <div class="form-group">
+            <select class="form-control" name="category_id">
+                <option value="-1">Select a Benefit</option>
+                <option value="1">{{ category.title }}</option>
+            </select>
         </div>
 
         <div class="form-group">

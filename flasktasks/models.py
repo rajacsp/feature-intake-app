@@ -20,12 +20,14 @@ class Color(Enum):
 class Task(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(70))
+    outcome = db.Column(db.String(140))
     description = db.Column(db.String(140))
     status = db.Column(db.Integer)
     category_id = db.Column(db.Integer, db.ForeignKey('category.id'))
 
-    def __init__(self, title, description, category_id):
+    def __init__(self, title, outcome, description, category_id):
         self.title = title
+        self.outcome = outcome
         self.description = description
         self.status = Status.PROPOSED.value
         self.category_id = category_id
@@ -41,6 +43,13 @@ class Category(db.Model):
         self.title = title
         self.description = description
         self.tag_id = tag_id
+
+class Benefit(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    btype = db.Column(db.String(70), unique=True)
+
+    def __init__(self, btype):
+        self.btype = btype
 
 class Tag(db.Model):
     id = db.Column(db.Integer, primary_key=True)
